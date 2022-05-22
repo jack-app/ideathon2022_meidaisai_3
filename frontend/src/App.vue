@@ -1,32 +1,21 @@
 <template>
+<!-- 共通部分を書きたいときはこのapp.vueに記述 -->
   <div id="app">
     <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <!-- リンクの遷移についてはaタグにhref='/'みたいにいろんな書き方できる -->
+      <router-link to="/">Home</router-link>
+      <router-link to="/question">question</router-link>
+      <router-link to="/answer">answer</router-link>
     </nav>
+    <!-- router-viewタグがviesファイルの各ページ要素を表示 -->
     <router-view/>
   </div>
 </template>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
 
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
+
+<script>
+
+</script>

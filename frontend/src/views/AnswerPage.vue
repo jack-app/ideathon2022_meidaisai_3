@@ -2,9 +2,7 @@
 <!-- まずdivで囲う -->
 <div>
 <!-- ここにhtmlを書く -->
-<!-- 写真はassetsフォルダに入れる -->
-  <img alt="Vue logo" src="../assets/logo.png">
-  <h1>ほーむぺーじ</h1>
+<h1>こたえぺーじ</h1>
 </div>
 </template>
 
