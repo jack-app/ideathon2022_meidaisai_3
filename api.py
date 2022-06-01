@@ -16,3 +16,8 @@ class API_tranlate:
         )
 
         return self.response.translations
+
+input_text = input()
+sample = API_tranlate(input_text)
+answer = sample.translate_text()
+print(answer)
