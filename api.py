@@ -35,22 +35,25 @@ class API_translate:
         while (self.count <= count):    #変換する言語コードをランダムに回数分取得
             self.output_code.append(random.choice(self.code))
             self.count += 1
-            
+        self.output_code.append("finish")
+        print(self.output_code)
         _from = "ja"
         for index, language_code in enumerate(self.output_code): #グーグル翻訳APIをたたく
+            if language_code=="finish":
+                self.many_translate(_from, "ja")
+                break
             # 同じ言語同士の翻訳はできないエラー対策
             if _from==language_code:
+                print(f"{index}: {_from} to {language_code}は実行されません")
                 continue
-            print(f"{_from} to {language_code}")
-            print(self.text)
+            print(f"{index}: {_from} to {language_code}")
             self.many_translate(_from, language_code)
             _from = language_code
-            if index == len(self.output_code) -1:
-                self.many_translate(_from, "ja")
+
         return self.text
     
     
 if __name__=="__main__":
     with open("./source.txt", "r", encoding="utf-8") as f:
         text = f.read()
-        print(API_translate(text).translate_text(count=3))
+        print(API_translate(text).translate_text(count=20))
