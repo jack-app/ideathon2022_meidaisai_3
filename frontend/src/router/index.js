@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import QuestionPage from '../views/QuestionPage.vue'
 import AnswerPage from '../views/AnswerPage.vue'
-
+import ExplanationPage from'../views/ExplanationPage.vue'
 
 Vue.use(VueRouter)
 
@@ -22,6 +22,11 @@ const routes = [
     path: '/answer',
     name: 'AnswerPage',
     component: AnswerPage
+  },
+  {
+    path: '/explanation',
+    name: 'explanation',
+    component: ExplanationPage
   }
 ]
 

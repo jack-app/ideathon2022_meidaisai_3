@@ -6,6 +6,8 @@
       <router-link to="/">Home</router-link>
       <router-link to="/question">question</router-link>
       <router-link to="/answer">answer</router-link>
+      <router-link to="/explanation">explanation</router-link>
+
     </nav>
     <!-- router-viewタグがviesファイルの各ページ要素を表示 -->
     <router-view/>
@@ -13,7 +15,9 @@
 </template>
 
 <style>
-
+body{
+  background-color:#febab8;
+}
 </style>
 
 <script>
