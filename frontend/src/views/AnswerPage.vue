@@ -1,8 +1,7 @@
 <template>
-<!-- まずdivで囲う -->
-<div>
-<!-- ここにhtmlを書く -->
-<h1>こたえぺーじ</h1>
+<div class="container">
+    <p v-if="$route.params.bool">正解！</p>
+    <p v-else>不正解...</p>
 </div>
 </template>
 
@@ -13,5 +12,7 @@
 </style>
 
 <script>
-// ここにjavascript(vue.js)を書く
+export default {
+    name: 'AnswerPage'
+}
 </script>

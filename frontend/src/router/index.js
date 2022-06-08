@@ -20,7 +20,7 @@ const routes = [
   },
   {
     path: '/answer',
-    name: 'answer',
+    name: 'AnswerPage',
     component: AnswerPage
   }
 ]
