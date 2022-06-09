@@ -1,44 +1,27 @@
 <template>
-    <!-- <div class="question">
+<div class="container">
+    <div class="question">
         <p>問題</p>
         <p>{{ sampleData.source }}</p>
     </div>
-    <div id="choises"> -->
+    <div id="choices" class="choices"> -->
         <!-- AnswerPageに真偽値を渡す。正解の選択肢ならtrue -->
-        <!-- <router-link
-            :to="{ name: 'AnswerPage', params:{ bool: true }}"
+        <router-link
+            :to="{ name: 'AnswerPage', params:{ bool: true }}" class="choice"
         >{{ sampleData.choices.correct }}
         </router-link>
         <router-link
-            :to="{ name: 'AnswerPage', params:{ bool: false }}"
+            :to="{ name: 'AnswerPage', params:{ bool: false }}" class="choice"
         >{{ sampleData.choices.wrong[0] }}
         </router-link>
         <router-link
-            :to="{ name: 'AnswerPage', params:{ bool: false }}"
+            :to="{ name: 'AnswerPage', params:{ bool: false }}" class="choice"
         >{{ sampleData.choices.wrong[1] }}
         </router-link>
         <router-link
-            :to="{ name: 'AnswerPage', params:{ bool: false }}"
+            :to="{ name: 'AnswerPage', params:{ bool: false }}" class="choice"
         >{{ sampleData.choices.wrong[2] }}
-        </router-link> -->
-    <!-- </div> -->
-<!-- まずdivで囲う -->
-<div class="question">
- <!-- ここにhtmlを書く -->
-    <div>
-    <button class="answera">A</button>
-    </div>
-
-    <div>
-        <button class="answerb">B</button>
-    </div>
-
-    <div>
-        <button class="answerc">C</button>
-    </div>
-
-    <div>
-        <button class="answerd">D</button>
+        </router-link>
     </div>
 </div>
 
@@ -47,15 +30,13 @@
 </template>
 
 <style scoped>
-/* scopedを指定しないと他のページにもcssが適用 */
-/* ここにcssを書く */
-.question{
+/* .question {
     padding:20px 15px 200px;
     margin: 20px 150px 200px;
     color: rgb(88, 231, 176);
     background:rgb(88, 231, 176);
     border-radius: 25px
-}
+} */
 
 .answera{
     position: absolute;
@@ -116,9 +97,15 @@ export default {
             }
         }
     },
+    // DOM生成前に実行
     mounted() {
-        let target = document.getElementById('choises');
-        // choisesの子要素をシャッフルする
+        axios
+            .get('') // ここに使用するjsonを指定
+            .then((response) => (this.sample = response.data)) // 取り込むデータの名前を記述
+            .catch((error) => console.log(error));
+
+        let target = document.getElementById('choices');
+        // choicesの子要素をシャッフルする
         for(let i =target.children.length; i >= 0; i--){
             target.appendChild(target.children[Math.random()*i|0]);
         }

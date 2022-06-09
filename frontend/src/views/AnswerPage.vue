@@ -1,17 +1,16 @@
 <template>
-    <!-- <p v-if="$route.params.bool">正解！</p>
-    <p v-else>不正解...</p> -->
-
-<!-- まずdivで囲う -->
-<div>
-<!-- ここにhtmlを書く -->
-<h1>こたえぺーじ</h1>
- <div>
-    <button class="nextquestion">次の問題へ</button>
- </div>
- <div class="monndaikotae">
-  <p>元の問題文</p>
- </div>
+<div class="container">
+    <div class="judge">
+        <p v-if="$route.params.bool" class="correct">正解！</p>
+        <p v-else class="wrong">不正解...</p>
+    </div>
+    <div class="answer">
+        <p class="title">原文</p>
+        <p class="text">昔々あるところに………</p>
+    </div>
+    <div>
+        <button class="nextquestion">次の問題へ</button>
+    </div>
 </div>
 
 </template>
@@ -19,12 +18,26 @@
 
 
 <style scoped>
-/* scopedを指定しないと他のページにもcssが適用 */
-/* ここにcssを書く */
+.answer {
+    margin: 0 auto;
+    width: 80%;
+    height: 400px;
+    background-color: rgb(115, 227, 224);
+    border-radius: 25px;
+}
+
+.title {
+    margin-left: 5%;
+}
+
+.text {
+    margin: 0 auto;
+    width: 90%;
+}
+
 .nextquestion{
-   position: relative;
-   top: 500px;
-   left: 90%;
+   margin-top: 100px;
+   margin-left: 90%;
    width: 8%;
    background-color: rgb(83, 254, 177);
    border-color: rgb(83, 254, 177);
@@ -32,13 +45,6 @@
    padding: 10px;
 }
 
-.monndaikotae{
-   padding:25px 15px 200px;
-   margin: 150px 150px 200px;
-   color: rgb(115, 227, 224);
-   background:rgb(115, 227, 224);
-   border-radius: 25px;
-}
 </style>
 
 <script>
