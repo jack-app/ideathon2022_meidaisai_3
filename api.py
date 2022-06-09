@@ -1,4 +1,3 @@
-from curses import raw
 from google.cloud import translate
 import random
 
