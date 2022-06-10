@@ -38,11 +38,12 @@
     margin: 0 auto;
     width: 80%;
     height: 400px;
-    background-color: rgb(115, 227, 224);
+    background-color: #C3E6F1;
     border-radius: 25px;
 }
 
 .title {
+    padding-top: 32px;
     margin-left: 5%;
     font-weight: bold;
 }

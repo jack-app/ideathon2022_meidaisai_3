@@ -21,7 +21,11 @@ def index(path):
 
 @app.route('/api')
 def respond():
-    count = int(request.args.get("count"))
+    try:
+        count = int(request.args.get("count"))
+    except Exception as e:
+        print(e)
+        count = 3
     binary_str = request.args.get("b")
     q = Question(binary_str, "./source.json")
     translated_text = API_translate(q.question["content"]).translate_text(count)
