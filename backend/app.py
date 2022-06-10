@@ -1,9 +1,7 @@
 from flask import Flask,request, render_template, jsonify
 from api import API_translate
 from question_choice import Question
-
-
-import random
+import os 
 
 
 app = Flask(
@@ -23,7 +21,7 @@ def index(path):
 def respond():
     count = int(request.args.get("count"))
     binary_str = request.args.get("b")
-    q = Question(binary_str, "./source.json")
+    q = Question(binary_str, os.getcwd() + "/source.json")
     translated_text = API_translate(q.question["content"]).translate_text(count)
     print(q.wrongs)
     res = {
