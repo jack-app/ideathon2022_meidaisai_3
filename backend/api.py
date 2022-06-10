@@ -1,6 +1,6 @@
 from google.cloud import translate
 import random
-
+import os
 class API_translate:
     # クラスのインスタンスを作成
     def __init__(self, text="問題が発生しました"):
@@ -26,7 +26,8 @@ class API_translate:
         self.client = translate.TranslationServiceClient()  
         self.location = "global"
         self.parent = f"projects/{self.project_id}/locations/{self.location}"
-        self.path = "language_code.txt" #言語コード一覧のpathを取得
+        self.path = os.getcwd() + "/backend/language_code.txt" #言語コード一覧のpathを取得
+        # TODO: 本番環境かどうかでパスの書き方を自動で分ける
         # self.text = [text]  #翻訳のテキストを複製
         with open(self.path) as f:  #全言語コードのリスト化
             self.code = f.read()
