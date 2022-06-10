@@ -1,4 +1,4 @@
-from flask import Flask,request, jsonify
+from flask import Flask,request, render_template, jsonify
 from api import API_translate
 from question_choice import Question
 
@@ -6,12 +6,18 @@ from question_choice import Question
 import random
 
 
-app = Flask(__name__)
+app = Flask(
+            __name__, 
+            static_folder='../frontend/dist/static', 
+            template_folder='../frontend/dist'
+            )
+
 app.config['JSON_AS_ASCII'] = False
 
-@app.route('/')
-def index():
-    return 'Hello World'
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def index(path):
+    return render_template('index.html')
 
 @app.route('/api')
 def respond():
