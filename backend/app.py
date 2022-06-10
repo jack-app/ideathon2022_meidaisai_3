@@ -21,7 +21,7 @@ def index(path):
 def respond():
     count = int(request.args.get("count"))
     binary_str = request.args.get("b")
-    q = Question(binary_str, os.getcwd() + "/source.json")
+    q = Question(binary_str, os.getcwd() + "/backend/source.json")
     translated_text = API_translate(q.question["content"]).translate_text(count)
     print(q.wrongs)
     res = {
