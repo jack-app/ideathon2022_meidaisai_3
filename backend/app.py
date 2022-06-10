@@ -31,7 +31,7 @@ def respond():
     print(q.wrongs)
     res = {
         "source": q.question["content"],
-        "translated": translated_text, 
+        "translated": translated_text[0], 
         "choices": {
             "correct": q.question["title"],
             "wrong": q.wrongs,
