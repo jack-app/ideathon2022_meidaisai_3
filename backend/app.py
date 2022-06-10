@@ -2,6 +2,7 @@ from flask import Flask,request, render_template, jsonify
 from api import API_translate
 from question_choice import Question
 import os 
+from flask_cors import CORS
 
 
 app = Flask(
@@ -9,6 +10,10 @@ app = Flask(
             static_folder='../frontend/dist/static', 
             template_folder='../frontend/dist'
             )
+CORS(
+    app,
+    origins=["*"]
+)
 
 app.config['JSON_AS_ASCII'] = False
 
