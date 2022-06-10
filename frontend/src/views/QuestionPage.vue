@@ -2,30 +2,28 @@
 <div class="container">
     <div class="question">
         <p>問題</p>
-        <p>{{ sampleData.source }}</p>
+        <p>{{ sample.translated }}</p>
     </div>
     <div id="choices" class="choices"> -->
         <!-- AnswerPageに真偽値を渡す。正解の選択肢ならtrue -->
         <router-link
-            :to="{ name: 'AnswerPage', params:{ bool: true }}" class="choice"
-        >{{ sampleData.choices.correct }}
+            :to="{ name: 'AnswerPage', params:{ bool: true, origin: sample.source, translated: sample.translated }}" class="choice"
+        >{{ sample.choices.correct }}
         </router-link>
         <router-link
-            :to="{ name: 'AnswerPage', params:{ bool: false }}" class="choice"
-        >{{ sampleData.choices.wrong[0] }}
+            :to="{ name: 'AnswerPage', params:{ bool: false, origin: sample.source, translated: sample.translated }}" class="choice"
+        >{{ sample.choices.wrong[0] }}
         </router-link>
         <router-link
-            :to="{ name: 'AnswerPage', params:{ bool: false }}" class="choice"
-        >{{ sampleData.choices.wrong[1] }}
+            :to="{ name: 'AnswerPage', params:{ bool: false, origin: sample.source, translated: sample.translated }}" class="choice"
+        >{{ sample.choices.wrong[1] }}
         </router-link>
         <router-link
-            :to="{ name: 'AnswerPage', params:{ bool: false }}" class="choice"
-        >{{ sampleData.choices.wrong[2] }}
+            :to="{ name: 'AnswerPage', params:{ bool: false, origin: sample.source, translated: sample.translated }}" class="choice"
+        >{{ sample.choices.wrong[2] }}
         </router-link>
     </div>
 </div>
-
-
 
 </template>
 
@@ -84,26 +82,23 @@
 </style>
 
 <script>
+import axios from 'axios';
+
 export default {
     data() {
         return {
-            sampleData: {
-                source: "昔々あるところに………",
-                choices: {
-                    correct: "桃太郎",
-                    wrong: ["一寸法師", "三年寝太郎", "カチカチ山"]
-                },
-                finish: 10001
-            }
+            sample: null
         }
     },
     // DOM生成前に実行
     mounted() {
         axios
-            .get('') // ここに使用するjsonを指定
+            .get('https://still-stream-18883.herokuapp.com/') // ここに使用するjsonを指定
             .then((response) => (this.sample = response.data)) // 取り込むデータの名前を記述
             .catch((error) => console.log(error));
-
+    },
+    // データの変更後に呼び出す
+    updated() {
         let target = document.getElementById('choices');
         // choicesの子要素をシャッフルする
         for(let i =target.children.length; i >= 0; i--){

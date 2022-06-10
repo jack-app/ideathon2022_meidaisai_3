@@ -4,11 +4,13 @@
 <!-- ここにhtmlを書く -->
 <!-- 写真はassetsフォルダに入れる -->
   <h1 class="title">ドン・ブラコッコ</h1>
-  <button class="btn1" v-on:click="QuestionPage">スタート</button>
-  <button class="btn2" v-on:click="ExplanationPage">
-    <router-link to="/explanation"></router-link>
-    遊び方
-  </button>
+  <button class="btn1" v-on:click="postTimes(); QuestionPage()" >スタート</button>
+  <button class="btn2" v-on:click="ExplanationPage()">遊び方</button>
+  <select  v-model="selectedTime">
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+  </select>
 </div>
 </template>
 
@@ -40,12 +42,28 @@
 </style>
 
 <script>
-// ここにjavascript(vue.js)を書く
-export default {
+import axios from 'axios';
 
+export default {
+  data(){
+    return {
+      selectedTime: "1"
+    }
+  },
   methods: {
     QuestionPage(){
       this.$router.push('/question')
+    },
+    ExplanationPage(){
+      this.$router.push('/explanation')
+    },
+    postTimes: function(){
+      axios
+        .put('https://still-stream-18883.herokuapp.com/' + this.selectedTime)
+        .then(response => {
+          console.log(response.data);
+        })
+        .catch(error => console.log(error))
     }
   }
 }
