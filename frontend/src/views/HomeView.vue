@@ -4,13 +4,13 @@
   <div class="image">
     <img src="../assets/donburako.png" />
   </div>
-  <button class="btn1" v-on:click="QuestionPage()" >スタート</button>
+  <button class="btn1" v-on:click="postTimes(); QuestionPage()" >スタート</button>
   <button class="btn2" v-on:click="ExplanationPage()">遊び方</button>
-  <!-- <select  v-model="selectedTime">
+  <select  v-model="selectedTime">
     <option>1</option>
     <option>2</option>
     <option>3</option>
-  </select> -->
+  </select>
 </div>
 </template>
 
