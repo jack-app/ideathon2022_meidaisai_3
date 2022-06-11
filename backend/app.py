@@ -7,8 +7,8 @@ from flask_cors import CORS
 
 app = Flask(
             __name__, 
-            static_folder='../frontend/dist/static', 
-            template_folder='../frontend/dist'
+            static_folder= os.getcwd() +'/../frontend/dist/static', 
+            template_folder= os.getcwd() + '../frontend/dist'
             )
 CORS(
     app,
