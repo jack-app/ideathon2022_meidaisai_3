@@ -90,7 +90,7 @@ export default {
     mounted() {
         axios
             // .get('https://obscure-temple-92668.herokuapp.com/api?b='+ this.query +'&count=2') // ここに使用するjsonを指定
-            .get('https://donburakko.herokuapp.com/api?b=100000000000000&count=3') // ここに使用するjsonを指定
+            .get('/api?b=00000000000000000000000&count=3') // ここに使用するjsonを指定
             .then((response) => (this.sample = response.data)) // 取り込むデータの名前を記述
             .catch((error) => console.log(error));
     },
