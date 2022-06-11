@@ -1,9 +1,9 @@
 <template>
-<!-- まずdivで囲う -->
 <div>
-<!-- ここにhtmlを書く -->
-<!-- 写真はassetsフォルダに入れる -->
   <h1 class="title">ドン・ブラコッコ</h1>
+  <div class="image">
+    <img src="../assets/donburako.png" />
+  </div>
   <button class="btn1" v-on:click="postTimes(); QuestionPage()" >スタート</button>
   <button class="btn2" v-on:click="ExplanationPage()">遊び方</button>
   <select  v-model="selectedTime">
@@ -15,12 +15,14 @@
 </template>
 
 <style scoped>
-/* scopedを指定しないと他のページにもcssが適用 */
-/* ここにcssを書く */
-
 .title{
-  margin: 0 39%;
+  text-align: center;
 }
+
+.image {
+  text-align: center;
+}
+
 .btn1{
   display: block;
   background-color:#FFF;
