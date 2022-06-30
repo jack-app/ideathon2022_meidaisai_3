@@ -1,16 +1,21 @@
 from flask import Flask,request, render_template, jsonify
 from api import API_translate
 from question_choice import Question
+import os 
+from flask_cors import CORS
+from constants import Constants
 
-
-import random
-
+c = Constants()
 
 app = Flask(
             __name__, 
-            static_folder='../frontend/dist/static', 
-            template_folder='../frontend/dist'
+            static_folder= c.prefix_frontend_dir + '/dist/static', 
+            template_folder= c.prefix_frontend_dir + '/dist'
             )
+CORS(
+    app,
+    origins=["*"]
+)
 
 app.config['JSON_AS_ASCII'] = False
 
@@ -27,12 +32,12 @@ def respond():
         print(e)
         count = 3
     binary_str = request.args.get("b")
-    q = Question(binary_str, "./source.json")
+    q = Question(binary_str, c.prefix_source_dir + "/source.json")
     translated_text = API_translate(q.question["content"]).translate_text(count)
     print(q.wrongs)
     res = {
         "source": q.question["content"],
-        "translated": translated_text, 
+        "translated": translated_text[0], 
         "choices": {
             "correct": q.question["title"],
             "wrong": q.wrongs,
