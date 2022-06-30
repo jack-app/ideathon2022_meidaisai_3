@@ -10,8 +10,8 @@
         <p class="title">原文</p>
         <p class="text">{{ $route.params.origin }}</p>
     </div>
-    <div>
-        <button class="nextquestion" v-on:click="QuestionPage()">次の問題へ</button>
+    <div class="btnparent">
+        <button class="nextbtn" v-on:click="QuestionPage()">次の問題へ</button>
     </div>
 </div>
 
@@ -37,9 +37,9 @@
 .answer {
     margin: 0 auto;
     width: 80%;
-    height: 400px;
     background-color: #C3E6F1;
     border-radius: 25px;
+    padding-bottom: 32px;
 }
 
 .title {
@@ -53,10 +53,15 @@
     width: 90%;
 }
 
-.nextquestion{
-   margin-top: 100px;
-   margin-left: 90%;
-   width: 8%;
+.btnparent {
+    float: right;
+    padding-right: 5%;
+}
+
+.nextbtn{
+   margin-top: 32px;
+   text-align: center;
+   width: 128px;
    background-color: rgb(83, 254, 177);
    border-color: rgb(83, 254, 177);
    border-radius: 10%;

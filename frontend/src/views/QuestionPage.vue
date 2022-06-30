@@ -41,7 +41,9 @@
     background-color: #C3E6F1;
     border-radius: 25px;
     margin: 0 auto;
-    height: 300px;
+    margin-top: 64px;
+    margin-bottom: 96px;
+    padding-bottom: 16px;
 }
 
 .title {
@@ -57,15 +59,16 @@
 
 .choices {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
-    margin-top: 64px;
+    margin-top: 32px;
 }
 
 .choice {
-    width: 20%;
+    width: 40%;
     background-color: rgb(92, 254, 165);
     text-align: center;
-    height: 48px;
+    margin-bottom: 24px;
     line-height: 48px;
     border-radius: 16px;
 }
@@ -80,18 +83,30 @@
 import axios from 'axios';
 
 export default {
+    name: 'QuestionPage',
     data() {
         return {
-            sample: null,
-            query: 100000000000000
+            sample: {
+                source: "",
+                translated: "",
+                choices: {
+                    correct: "",
+                    wrong: ""
+                },
+                finish: "000000000000000"
+            },
         }
     },
     // DOM生成前に実行
     mounted() {
+        let selectedTime = this.$route.params.count
         axios
-            // .get('https://obscure-temple-92668.herokuapp.com/api?b='+ this.query +'&count=2') // ここに使用するjsonを指定
-            .get('/api?b=00000000000000000000000&count=3') // ここに使用するjsonを指定
-            .then((response) => (this.sample = response.data)) // 取り込むデータの名前を記述
+            .get('https://donburakko.herokuapp.com/api?b=' + this.sample.finish + '&count=' + selectedTime)
+            .then((response) => {
+                (this.sample = response.data),
+                console.log(this.sample.finish),
+                console.log(selectedTime)
+            }) // 取り込むデータの名前を記述
             .catch((error) => console.log(error));
     },
     // データの変更後に呼び出す
@@ -101,7 +116,6 @@ export default {
         for(let i =target.children.length; i >= 0; i--){
             target.appendChild(target.children[Math.random()*i|0]);
         }
-        // this.query = this.query + this.sample.finish
     }
 }
 </script>

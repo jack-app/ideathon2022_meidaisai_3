@@ -4,13 +4,23 @@
   <div class="image">
     <img src="../assets/donburako.png" />
   </div>
-  <button class="btn1" v-on:click="postTimes(); QuestionPage()" >スタート</button>
-  <button class="btn2" v-on:click="ExplanationPage()">遊び方</button>
+  <button class="btn" v-on:click="QuestionPage()" >スタート</button>
+  <button class="btn" v-on:click="ExplanationPage()">遊び方</button>
   <select  v-model="selectedTime">
     <option>1</option>
     <option>2</option>
     <option>3</option>
+    <option>4</option>
+    <option>5</option>
+    <option>6</option>
+    <option>7</option>
+    <option>8</option>
+    <option>9</option>
   </select>
+  <router-link
+    :to="{name: 'QuestionPage', params: {count: selectedTime}}"
+  >スタート
+  </router-link>
 </div>
 </template>
 
@@ -23,22 +33,14 @@
   text-align: center;
 }
 
-.btn1{
+.btn {
   display: block;
   background-color:#FFF;
   width: 30%;
-  padding: 15px 30px;
+  padding: 15px 3px;
   border-radius: 15px;
-  margin: 2% 35%;
-}
-
-.btn2{
-  display: block;
-  background-color:#FFF;
-  width: 30%;
-  padding: 15px 30px;
-  border-radius: 15px;
-  margin: 2% 35%;
+  margin: 0 auto;
+  margin-top: 24px;
 }
 
 </style>
