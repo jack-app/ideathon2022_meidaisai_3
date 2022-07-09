@@ -1,9 +1,15 @@
 from flask import Flask,request, render_template, jsonify
+from flask_socketio import SocketIO, send, emit
 from api import API_translate
 from question_choice import Question
 import os 
 from flask_cors import CORS
 from constants import Constants
+
+all_user = []
+room_volume = [2] * 50 + [4] * 50
+room_condition = [True] * 100
+
 
 c = Constants()
 
@@ -17,12 +23,44 @@ CORS(
     origins=["*"]
 )
 
+socketio = SocketIO(app, cors_allowed_origins='*')
 app.config['JSON_AS_ASCII'] = False
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def index(path):
     return render_template('index.html')
+
+@app.route('/prepare',methods = ['POST'])
+@socketio.on('prepare')
+def prepare():
+    name = request.form.get('name')
+    option = request.form.get('option')
+    global all_user
+    global room_condition
+    global room_volume
+    if option == 'two':
+        i = 0
+    else:
+        i = 50
+    while room_condition[i]:
+        i += 1
+    room = i
+    all_user[room].append(name)
+    emit('battle_start', {'room' : room})
+    if room_volume[i] == len(all_user[i]):
+        room_condition[i] = False
+        emit('battle_start', {'ok_num': room}, broadcast = True)
+        res = { 
+            'user' : all_user
+        }
+        return jsonify(res) 
+
+@socketio.on('battle_end')
+def end():
+    global room_volume 
+    global all_user
+    
 
 @app.route('/api')
 def respond():
