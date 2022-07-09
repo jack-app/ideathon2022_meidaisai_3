@@ -58,9 +58,12 @@ def prepare():
 
 @socketio.on('battle_end')
 def end():
-    global room_volume 
+    room = request.form.get('room_unm') 
     global all_user
-    
+    global room_condition
+    room_condition[room] = True
+    del all_user[room]
+
 
 @app.route('/api')
 def respond():
