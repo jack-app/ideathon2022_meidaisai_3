@@ -4,23 +4,17 @@
   <div class="image">
     <img src="../assets/donburako.png" />
   </div>
+  <div class="selection">
+    <p>翻訳回数</p>
+    <select  v-model="selectedTime">
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
+  </div>
   <button class="btn" v-on:click="QuestionPage()" >スタート</button>
   <button class="btn" v-on:click="ExplanationPage()">遊び方</button>
-  <select  v-model="selectedTime">
-    <option>1</option>
-    <option>2</option>
-    <option>3</option>
-    <option>4</option>
-    <option>5</option>
-    <option>6</option>
-    <option>7</option>
-    <option>8</option>
-    <option>9</option>
-  </select>
-  <router-link
-    :to="{name: 'QuestionPage', params: {count: selectedTime}}"
-  >スタート
-  </router-link>
 </div>
 </template>
 
@@ -30,6 +24,10 @@
 }
 
 .image {
+  text-align: center;
+}
+
+.selection {
   text-align: center;
 }
 
@@ -46,13 +44,20 @@
 </style>
 
 <script>
-import axios from 'axios';
-
 export default {
   data(){
     return {
-      selectedTime: "1"
+      selectedTime: ""
     }
+  },
+  mounted() {
+    // ローカルストレージから前回の選択回数を引き継ぐ
+    // todo:homeに行ったらローカルストレージを削除
+    this.selectedTime = localStorage.getItem('translationTime')
+  },
+  updated() {
+    // selectboxの更新が起こったらローカルに保存
+    localStorage.setItem('translationTime', this.selectedTime)
   },
   methods: {
     QuestionPage(){
@@ -61,14 +66,6 @@ export default {
     ExplanationPage(){
       this.$router.push('/explanation')
     },
-    postTimes: function(){
-      axios
-        .put('https://still-stream-18883.herokuapp.com/' + this.selectedTime)
-        .then(response => {
-          console.log(response.data);
-        })
-        .catch(error => console.log(error))
-    }
   }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
 <div class="container">
     <div class="question">
-        <p class="title">問題</p>
+        <p class="title">問題 ({{selectedTime}}回翻訳)</p>
         <p class="text">{{ sample.translated }}</p>
     </div>
     <div id="choices" class="choices">
@@ -95,17 +95,18 @@ export default {
                 },
                 finish: "000000000000000"
             },
+            selectedTime: ""
         }
     },
     // DOM生成前に実行
     mounted() {
-        let selectedTime = this.$route.params.count
+        this.selectedTime = localStorage.getItem('translationTime')
         axios
-            .get('https://donburakko.herokuapp.com/api?b=' + this.sample.finish + '&count=' + selectedTime)
+            .get('https://donburakko.herokuapp.com/api?b=' + this.sample.finish + '&count=' + this.selectedTime)
             .then((response) => {
                 (this.sample = response.data),
                 console.log(this.sample.finish),
-                console.log(selectedTime)
+                console.log(this.selectedTime)
             }) // 取り込むデータの名前を記述
             .catch((error) => console.log(error));
     },
@@ -116,6 +117,6 @@ export default {
         for(let i =target.children.length; i >= 0; i--){
             target.appendChild(target.children[Math.random()*i|0]);
         }
-    }
+    },
 }
 </script>
